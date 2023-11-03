@@ -1,0 +1,111 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='mystyle.css') }}">
+        <title>RM Survey</title>
+    </head>
+    <body>
+    <div class="ctrlqFormContentWrapper">
+        <div class="ctrlqHeaderMast">
+            <div style="text-align: center; margin-top: 30px;">
+                <img src="{{ url_for('static',filename='logo2.jpg') }}" alt="DA-IICT logo">
+            </div>
+
+        </div>
+        <div class="ctrlqCenteredContent">
+            <div class="ctrlqFormCard">
+                <div class="ctrlqAccent"></div>
+                <div class="ctrlqFormContent">
+
+                    <form action="{{ url_for('reviewer_matchmaking', author_pk=lst['author_pk']) }}" method='POST'>
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <h4>Reviewer Matchmaking Survey</h4>
+                                <p> You'll be shown six sections, each consisting of 'Paper title' and 'Paper keyphrases'.
+                                    Accounting them, you are supposed to rate the section based on your confidence to review the paper
+                                    on a scale of 0-5. If you'd like to contribute more, you may fill atmost four more forms again to answer more such sections.
+                                    <br> <p style ="color: #ad0a0a; " >Note: You may come across same "title" across forms, but their "keyphrases"
+                                    will be different. Please rate the section based on the "keyphrases".</p>
+                                    <strong>The meaning of each score is given below:</strong>
+                                    <br> <u>0: Will pass, 1: Maybe but not keen, 2: Maybe, 3: Somewhat
+                                        confident, 4: Confident, 5: Highly confident </u></p>
+                            </div>
+                        </div>
+
+                        <!-- <div class="row">
+                            <div class="input-field col s12">
+                                <p>Your gender:</p>
+                                <input name="gender" type="radio" id="male" value="male" required>
+                                <label for='male'>Male</label>
+                                <input name="gender" type="radio" id="female" value="female">
+                                <label for='female'>Female</label>
+                                <input name="gender" type="radio" id="transgender" value="transgender">
+                                <label for='transgender'>Transgender</label>
+                                <input name="gender" type="radio" id="nopref" value="nopref">
+                                <label for='nopref'>Prefer not to say</label>
+                            </div>
+                        </div> -->
+
+                        <!-- <div class="row">
+                            <div class="input-field col s12">
+                                <p>Your occupation:</p>
+                                <input name="occupation" type="radio" id="ugrad_student" value="ugrad_student" required>
+                                <label for="ugrad_student">Undergrad student</label>
+                                <input name="occupation" type="radio" id="grad_student" value="grad_student">
+                                <label for="grad_student">Grad student</label>
+                                <input name="occupation" type="radio" id="teacher" value="teacher">
+                                <label for='teacher'>Teacher</label>
+                                <input name="occupation" type="radio" id="corporate_professional" value="corporate_professional">
+                                <label for='corporate_professional'>Corporate Professional</label>
+                                <input name="occupation" type="radio" id="other" value="other">
+                                <label for='other'>Other</label>
+                            </div>
+                        </div> -->
+
+                        {% for i in range(lst['data_length']) %}
+                        <hr>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <p for="{{ i }}"><b><i>Paper Title:</i></b> {{ lst['data'][i][1] }}</p>
+                                <p for="{{ i }}"><b><i>Paper Keyphrases:</i></b> {{ lst['data'][i][2] }}</p>
+                                {% for j in range(6) %}
+                                    <input name="{{ i }}" type="radio" id="{{ i }}{{ j }}" value="{{ j }}" {{ 'required' if j == 0 else '' }}>
+                                    <label for="{{ i }}{{ j }}">{{ j }}</label>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <br>
+                        {% endfor %}
+
+                        <div class="row" style = "padding-left : 25%;" >
+                            <div class="col 2" >
+                                <button type="submit" class="waves-effect waves-light btn-large" name="SubmitAndExit" value="SubmitAndExit">Submit and Exit</button>
+                            </div>
+
+                            <div class="col 2">
+                                <button type="submit" class="waves-effect waves-light btn-large" name="SubmitAndFillAgain" value="SubmitAndFillAgain">Submit and Fill again</button>
+                            </div>
+                        </div>
+
+                    </form>
+                    If you wish to answer more such sections later, you can again access the survey by providing your ssId in the home page.<br>
+                    <strong>Disclaimer:</strong> This data is solely for research purpose.
+                    Your name will be added to our contributor list when this dataset will be published.
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/additional-methods.min.js"></script>
+
+    </body>
+
+    </html>
