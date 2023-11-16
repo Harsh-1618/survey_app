@@ -2,6 +2,11 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/additional-methods.min.js"></script>
+    
         <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='mystyle.css') }}">
@@ -13,49 +18,53 @@
             <div style="text-align: center; margin-top: 30px;">
                 <img src="{{ url_for('static',filename='logo2.jpg') }}" alt="DA-IICT logo">
             </div>
-
         </div>
+
         <div class="ctrlqCenteredContent">
             <div class="ctrlqFormCard">
                 <div class="ctrlqAccent"></div>
                 <div class="ctrlqFormContent">
-
                     <form action="/provide_ssId" method='POST'>
-
                         <div class="row">
                             <div class="input-field col s12">
                                 <h4>Reviewer Matchmaking Survey</h4>
-                                <p> Please provide us your <strong> semantic scholar Id </strong> to proceed further.
+                                <p> Please select your name from the drop-down menu below to proceed further.
                                     It will enable us fetch data corresponding to you.</p>
                             </div>
                         </div>
 
+                        <label for="author" class="homePageLabel">Your Name:</label>
+                        <select name="author" id="author" required class="homePageSelect">
+                            <option value="" disabled selected>Select Name</option>
+                            {% for author in authors %}
+                            <option value="{{ author }}">{{ author }}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+
+                        <strong >Note:</strong> This data is solely for research purpose.
+                        Your identity will not be disclosed. You may inlist yourself as a part
+                        of contributors list when the dataset will be made public by clicking on the radio button below.
+                        <br>
+
                         <div class="row">
-                            <div class="input-field col s12">
-                                <input id="ssId" name="ssId" type="number" class="validate" required title="login to https://www.semanticscholar.org to get your ssId">
-                                <label for="ssId">Your semantic scholar Id (ssId)</label>
-                                <div id="e1"></div>
+                            <div class="input-field col s12" style="text-align: center;">
+                                <input name="contribute" type="radio" id="contriYes" value="True" required>
+                                <label for="contriYes">I would like to inlist in contributors list</label>
+
+                                <input name="contribute" type="radio" id="contriNo" value="False" required checked>
+                                <label for="contriNo">I would like to be anonymous</label>
                             </div>
                         </div>
+                        <br>
 
                         <div style="text-align: center;">
                             <button type="submit" class="waves-effect waves-light btn-large">Submit</button>
                         </div>
-
                     </form>
-                    <strong>Disclaimer:</strong> This data is solely for research purpose.
-                    Your name will be added to our contributor list when this dataset will be published.
                 </div>
             </div>
         </div>
     </div>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/additional-methods.min.js"></script>
-
     </body>
-
-    </html>
+</html>

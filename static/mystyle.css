@@ -83,4 +83,27 @@ body {
     -o-transform: translateY(0%);
     transform: translateY(0%);
   }
-  
+
+
+.homePageLabel {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: black;
+    padding-left: 1%;
+}
+
+.homePageSelect {
+    display: block;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+.hidden{
+  display:none;
+}

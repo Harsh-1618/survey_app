@@ -1,5 +1,9 @@
 import sqlite3
 
+model_dict = {"keybert":None,
+            "patternrank":None,
+            "promptrank":None}
+
 def create_connection(db_file: str):
     conn = None
     try:
@@ -24,7 +28,7 @@ def get_author_data(conn, author_pk):
         c.execute("SELECT next_page_start from authors WHERE author_pk = (?)", (author_pk,))
         start = c.fetchone()[0]
 
-        model_list = ["keybert", "patternrank", "promptrank"]
+        model_list = list(model_dict.keys())
         model_pos_neg_index = [start, (start+1)%5, (start+2)%5]
 
         # As of now: 6 questions, 3 models, each model 1 positive and 1 negative
@@ -41,8 +45,15 @@ def get_author_data(conn, author_pk):
     return result
 
 
-def store_response(conn, data_dict, responses):
+def store_contribute(conn, author_pk, contribute_response):
+    with conn:
+        c = conn.cursor()
+        c.execute("UPDATE authors SET wanna_contribute = (?) WHERE author_pk = (?)", (contribute_response ,author_pk))
+
+
+def store_response(conn, data_dict, responses, agree_responses):
     assert len(responses) == len(data_dict['data'])
+    assert len(agree_responses) == len(data_dict['data'])
     with conn:
         c = conn.cursor()
 
@@ -51,5 +62,5 @@ def store_response(conn, data_dict, responses):
         c.execute("UPDATE authors SET next_page_start = (?) WHERE author_pk = (?)", (updated_pages_submitted ,data_dict["author_pk"]))
 
         for i, data in enumerate(data_dict['data']):
-            c.execute("UPDATE model_author_paper_similarity SET author_hand_confidence = (?) WHERE model_author_paper_pk = (?)", (responses[i], data[0],))
+            c.execute("UPDATE model_author_paper_similarity SET author_hand_confidence = (?), rating_agreement = (?) WHERE model_author_paper_pk = (?)", (responses[i], agree_responses[i], data[0]))
             conn.commit()

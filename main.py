@@ -2,10 +2,11 @@ import crud
 import random
 import flask
 from flask import Flask, render_template, request, url_for, redirect
+from authors import author_names, authors_dict
 
 app = Flask(__name__)
-SURVEY_DB = 'daiict_survey.sqlite3'
 
+SURVEY_DB = 'daiict_survey.sqlite3'
 
 @app.route('/')
 def index():
@@ -25,13 +26,16 @@ def invalid_ssId():
 @app.route('/provide_ssId', methods=['GET', 'POST'])
 def provide_ssId():
     if request.method == 'GET':
-        return render_template("index.html")
+        return render_template("index.html", authors=author_names)
     if request.method == 'POST':
-        ssId = request.form.get('ssId')
+        contribute = request.form.get('contribute')
+        author = request.form.get('author')
+        ssId = authors_dict[author]
 
         # validate author:
         conn = crud.create_connection(SURVEY_DB)
         if (author_pk:=crud.validate_author(conn, ssId)) is not None:
+            crud.store_contribute(conn, author_pk, contribute)
             return redirect(url_for('reviewer_matchmaking', author_pk=author_pk))
         return redirect(url_for('invalid_ssId'))
 
@@ -54,10 +58,12 @@ def reviewer_matchmaking(author_pk):
         # occupation = request.form.get('occupation')
 
         responses = []
+        agree_responses = []
         for i in range(len(author_data)):
-            responses.append(request.form.get(str(i)))
+            responses.append(request.form.get("h"+str(i)))
+            agree_responses.append(request.form.get("a"+str(i)))
 
-        crud.store_response(conn, data_dict, responses)
+        crud.store_response(conn, data_dict, responses, agree_responses)
 
         if request.form.get('SubmitAndExit') is not None:
             return redirect(url_for('provide_ssId'))
@@ -67,4 +73,4 @@ def reviewer_matchmaking(author_pk):
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=5000, debug=True)
-    app.run(host='0.0.0.0', port=81, debug=True)
+    # app.run(host='0.0.0.0', port=81, debug=True)
