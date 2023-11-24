@@ -2,9 +2,9 @@ import crud
 import random
 import flask
 from flask import Flask, render_template, request, url_for, redirect
-from utils import SURVEY_DB
 from authors import author_names, authors_dict
 
+SURVEY_DB = "daiict_survey.sqlite3"
 app = Flask(__name__)
 
 @app.route('/')
