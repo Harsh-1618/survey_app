@@ -2,29 +2,28 @@ import crud
 import random
 import flask
 from flask import Flask, render_template, request, url_for, redirect
+from utils import SURVEY_DB
 from authors import author_names, authors_dict
 
 app = Flask(__name__)
 
-SURVEY_DB = 'daiict_survey.sqlite3'
-
 @app.route('/')
 def index():
-    return redirect(url_for('provide_ssId'))
+    return redirect(url_for('provide_name'))
 
 
-@app.route('/survey_finished')
+@app.route('/surveys/reviewer_matchmaking/survey_finished')
 def survey_finished():
     return render_template("survey_finished.html")
 
 
-@app.route('/invalid_ssId')
+@app.route('/surveys/reviewer_matchmaking/invalid_ssId') # should never hit since we no longer are taking inputs from users
 def invalid_ssId():
     return render_template("invalid_ssId.html")
 
 
-@app.route('/provide_ssId', methods=['GET', 'POST'])
-def provide_ssId():
+@app.route('/surveys/reviewer_matchmaking/provide_name', methods=['GET', 'POST'])
+def provide_name():
     if request.method == 'GET':
         return render_template("index.html", authors=author_names)
     if request.method == 'POST':
@@ -36,12 +35,12 @@ def provide_ssId():
         conn = crud.create_connection(SURVEY_DB)
         if (author_pk:=crud.validate_author(conn, ssId)) is not None:
             crud.store_contribute(conn, author_pk, contribute)
-            return redirect(url_for('reviewer_matchmaking', author_pk=author_pk))
+            return redirect(url_for('questions', author_pk=author_pk))
         return redirect(url_for('invalid_ssId'))
 
 
-@app.route('/surveys/reviewer_matchmaking/<author_pk>', methods=['GET', 'POST'])
-def reviewer_matchmaking(author_pk):
+@app.route('/surveys/reviewer_matchmaking/questions/<author_pk>', methods=['GET', 'POST'])
+def questions(author_pk):
     conn = crud.create_connection(SURVEY_DB)
     author_data = crud.get_author_data(conn, author_pk)
 
@@ -66,9 +65,9 @@ def reviewer_matchmaking(author_pk):
         crud.store_response(conn, data_dict, responses, agree_responses)
 
         if request.form.get('SubmitAndExit') is not None:
-            return redirect(url_for('provide_ssId'))
+            return redirect(url_for('provide_name'))
         elif request.form.get('SubmitAndFillAgain') is not None:
-            return redirect(url_for('reviewer_matchmaking', author_pk=author_pk))
+            return redirect(url_for('questions', author_pk=author_pk))
 
 
 if __name__ == '__main__':

@@ -45,27 +45,47 @@
     <body>
     <div class="ctrlqFormContentWrapper">
         <div class="ctrlqHeaderMast">
-            <div style="text-align: center; margin-top: 30px;">
-                <img src="{{ url_for('static',filename='logo2.jpg') }}" alt="DA-IICT logo">
-            </div>
+            <div style="display: flex; align-items: center;">
+                <div style="padding-left: 12%; padding-top: 2%; padding-right: 2%;">
+                    <img src="{{ url_for('static',filename='logo2.jpg') }}" width="200" height="200" alt="DA-IICT logo">
+                </div>
+    
+                <div style="color: rgb(255, 131, 6); font-size: 20px; flex-grow: 1; padding-right: 2%;">
+                    <p>Dhirubhai Ambani Institute of Information and Communication Technology,
+                        Near Reliance Cross Rd, Gandhinagar, Gujarat, India
+                    </p>
+                </div>
 
+                <div style="flex-shrink: 0; padding-top: 2%; padding-right: 11%;">
+                    <div style="display: flex; flex-direction: column;">
+                        <a href="https://daiict.ac.in/" target="_blank" style="text-decoration: none;">
+                            <button style="border-color: aquamarine; width: 100%; display: block; color: black; background: linear-gradient(to right, #11998E, #38EF7D); padding: 10px; margin-bottom: 10px; border-radius: 15px;">Visit Us</button>
+                        </a>
+
+                        <a href="https://maps.app.goo.gl/RgwJfimnTNhyzuVv9" target="_blank" style="text-decoration: none;">
+                            <button style="border-color: goldenrod; width: 100%; display: block; color: rgb(0, 0, 0); background: linear-gradient(to right, #009245, #FCEE21);  padding: 10px; margin-bottom: 10px; border-radius: 15px"" >View on Map</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
+
         <div class="ctrlqCenteredContent">
             <div class="ctrlqFormCard">
                 <div class="ctrlqAccent"></div>
                 <div class="ctrlqFormContent">
 
-                    <form action="{{ url_for('reviewer_matchmaking', author_pk=lst['author_pk']) }}" method='POST'>
+                    <form action="{{ url_for('questions', author_pk=lst['author_pk']) }}" method='POST'>
 
                         <div class="row">
                             <div class="input-field col s12">
-                                <h4>Reviewer Matchmaking Survey</h4>
-                                <p> You'll be shown six sections, each consists of 'keyphrases' for some published paper.
+                                <h4 style="font-family: Verdana;">Reviewer Matchmaking Survey</h4>
+                                <p style="font-family: Monospace;"> You'll be shown six sections, each consists of 'keyphrases' for some published paper.
                                     Accounting it, you are supposed to rate the section based on your confidence to review the paper
                                     on a scale of 0-5. <br> You need to finalize the rating by clicking on the "LOCK" button, after which you no longer can change it.
                                     Once you lock the rating, you will be shown the 'title' of the paper corresponding to the 'keyphrases'.
                                     Below it you have to answer whether your confidence changed or not after viewing an additional information such as the paper 'title'. This completes one section.
-                                    <br> <p style ="color: #ad0a0a; " >Note: You need to 'LOCK' each section and answer corresopnding 'yes/no' question in order to submit the form.
+                                    <br> <p style ="color: #ad0a0a; font-family: Monospace;" >Note: You need to 'LOCK' each section and answer corresopnding 'yes/no' question in order to submit the form.
                                         If you'd like to contribute more, you may fill atmost four more forms again to answer more such sections.</p>
                                     <strong>The meaning of each score is given below:</strong>
                                     <br>0 --> Will pass<br>1 --> Maybe but not keen<br>2 --> Somewhat
@@ -121,9 +141,9 @@
                                 <p class="paperTitle hidden" for="{{ i }}"> <b><i>Paper Title is:</i></b> {{ lst['data'][i][1] }}
                                     <br> Do you still agree with the score you provided?
                                     <input name="a{{ i }}" type="radio" id="ay{{ i }}" value="True" required>
-                                    <label for="ay{{ i }}">Yes</label>
+                                    <label for="ay{{ i }}" style="padding-left : 2.5%;">Yes</label>
                                     <input name="a{{ i }}" type="radio" id="an{{ i }}" value="False" required>
-                                    <label for="an{{ i }}">No</label>
+                                    <label for="an{{ i }}" style="padding-left : 2.5%;">No</label>
                                 </p>
                             </div>
                         </div>
@@ -142,7 +162,10 @@
                         </div>
 
                     </form>
-                    <p style ="color: #0779f3;">If you wish to answer more such forms later, you can again access the survey by selecting your name in the home page. The survey will continue to the next form from where you left.</p><br>
+                    <p style ="color: dodgerblue;">Thank you for taking this survey.
+                        We highly appreciate your valuable contribution &#128578.
+                        If you wish to answer more such forms later, you can again access the survey by selecting your name in the home page.
+                        The survey will continue to the next form from where you left.</p><br>
                 </div>
             </div>
         </div>

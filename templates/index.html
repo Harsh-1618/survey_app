@@ -2,6 +2,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js"></script>
@@ -15,8 +16,28 @@
     <body>
     <div class="ctrlqFormContentWrapper">
         <div class="ctrlqHeaderMast">
-            <div style="text-align: center; margin-top: 30px;">
-                <img src="{{ url_for('static',filename='logo2.jpg') }}" alt="DA-IICT logo">
+            <div style="display: flex; align-items: center;">
+                <div style="padding-left: 12%; padding-top: 2%; padding-right: 2%;">
+                    <img src="{{ url_for('static',filename='logo2.jpg') }}" width="200" height="200" alt="DA-IICT logo">
+                </div>
+    
+                <div style="color: rgb(255, 131, 6); font-size: 20px; flex-grow: 1; padding-right: 2%;">
+                    <p>Dhirubhai Ambani Institute of Information and Communication Technology,
+                        Near Reliance Cross Rd, Gandhinagar, Gujarat, India
+                    </p>
+                </div>
+
+                <div style="flex-shrink: 0; padding-top: 2%; padding-right: 11%;">
+                    <div style="display: flex; flex-direction: column;">
+                        <a href="https://daiict.ac.in/" target="_blank" style="text-decoration: none;">
+                            <button style="border-color: aquamarine; width: 100%; display: block; color: black; background: linear-gradient(to right, #11998E, #38EF7D); padding: 10px; margin-bottom: 10px; border-radius: 15px;">Visit Us</button>
+                        </a>
+
+                        <a href="https://maps.app.goo.gl/RgwJfimnTNhyzuVv9" target="_blank" style="text-decoration: none;">
+                            <button style="border-color: goldenrod; width: 100%; display: block; color: rgb(0, 0, 0); background: linear-gradient(to right, #009245, #FCEE21);  padding: 10px; margin-bottom: 10px; border-radius: 15px"" >View on Map</button>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -24,11 +45,16 @@
             <div class="ctrlqFormCard">
                 <div class="ctrlqAccent"></div>
                 <div class="ctrlqFormContent">
-                    <form action="/provide_ssId" method='POST'>
+                    <form action="provide_name" method='POST'>
                         <div class="row">
                             <div class="input-field col s12">
-                                <h4>Reviewer Matchmaking Survey</h4>
-                                <p> Please select your name from the drop-down menu below to proceed further.
+                                <h4 style="font-family: Verdana;">Reviewer Matchmaking Survey</h4>
+                                <p style="font-family: Monospace;">Welcome to DA-IICT portal for Reviewer Matchmaking survery. It is a part of a research problem of how to assign a manuscript to its best-matching reviewer in the peer review process of a conference.
+                                    We are in the process of developing an AI-based reviewer match-making system that aims to optimize the allocation of manuscripts submitted in a conference to review.</p>
+                                
+                                <p style="font-family: Monospace;"> Your contribution to this survey will help us build better AI matchmaking systems &#129302.
+                                    It won't take more than 5 minutes &#128516.
+                                    Please select your name from the drop-down menu below to proceed further.
                                     It will enable us fetch data corresponding to you.</p>
                             </div>
                         </div>
@@ -42,15 +68,15 @@
                         </select>
                         <br>
 
-                        <strong >Note:</strong> This data is solely for research purpose.
-                        Your identity will not be disclosed. You may inlist yourself as a part
+                        This data is solely for research purpose.
+                        Your identity will not be disclosed. You may enlist yourself as a part
                         of contributors list when the dataset will be made public by clicking on the radio button below.
                         <br>
 
                         <div class="row">
                             <div class="input-field col s12" style="text-align: center;">
                                 <input name="contribute" type="radio" id="contriYes" value="True" required>
-                                <label for="contriYes">I would like to inlist in contributors list</label>
+                                <label for="contriYes">I would like to enlist myself in the contributors list</label>
 
                                 <input name="contribute" type="radio" id="contriNo" value="False" required checked>
                                 <label for="contriNo">I would like to be anonymous</label>
@@ -59,8 +85,15 @@
                         <br>
 
                         <div style="text-align: center;">
-                            <button type="submit" class="waves-effect waves-light btn-large">Submit</button>
+                            <button type="submit" class="waves-effect waves-light btn-large">Proceed</button>
                         </div>
+
+                        <p style="color: dodgerblue;"><strong>Note: </strong>Please use chrome browser for best experience.
+                            If you're filling the survery via a phone, please turn on 'Desktop site' by: open chrome -> click on three dots on the upper right corner -> tick Desktop site button.
+                            Or
+                            <a href="https://support.google.com/chrome/answer/13514529?hl=en" target="_blank"><u>click here</u></a>
+                            for detailed instructions.
+                        </p>
                     </form>
                 </div>
             </div>

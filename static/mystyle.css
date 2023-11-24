@@ -8,8 +8,13 @@ body {
   }
   
   .ctrlqHeaderMast {
-    height: 278px;
-    background: #009688;
+    height: 300px;
+    /* background: #009688; */
+    background-image: url(connected_dots2.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    scroll-snap-type: mandatory;
   }
   
   .ctrlqFormContent {
@@ -46,7 +51,7 @@ body {
   }
   
   .ctrlqFormCard:first-of-type {
-    margin-top: -100px
+    margin-top: -50px
   }
   
   .ctrlqHeaderTitle {
@@ -91,6 +96,7 @@ body {
     font-size: 18px;
     color: black;
     padding-left: 1%;
+    font-family: Monospace;
 }
 
 .homePageSelect {
@@ -100,6 +106,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 4px;
     width: 100%;
+    font-family: Monospace;
     box-sizing: border-box;
     margin-bottom: 15px;
 }

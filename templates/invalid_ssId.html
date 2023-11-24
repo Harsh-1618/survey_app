@@ -16,18 +16,38 @@
     <body>
     <div class="ctrlqFormContentWrapper">
         <div class="ctrlqHeaderMast">
-            <div style="text-align: center; margin-top: 30px;">
-                <img src="{{ url_for('static',filename='logo2.jpg') }}" alt="DA-IICT logo">
-            </div>
+            <div style="display: flex; align-items: center;">
+                <div style="padding-left: 12%; padding-top: 2%; padding-right: 2%;">
+                    <img src="{{ url_for('static',filename='logo2.jpg') }}" width="200" height="200" alt="DA-IICT logo">
+                </div>
+    
+                <div style="color: rgb(255, 131, 6); font-size: 20px; flex-grow: 1; padding-right: 2%;">
+                    <p>Dhirubhai Ambani Institute of Information and Communication Technology,
+                        Near Reliance Cross Rd, Gandhinagar, Gujarat, India
+                    </p>
+                </div>
 
+                <div style="flex-shrink: 0; padding-top: 2%; padding-right: 11%;">
+                    <div style="display: flex; flex-direction: column;">
+                        <a href="https://daiict.ac.in/" target="_blank" style="text-decoration: none;">
+                            <button style="border-color: aquamarine; width: 100%; display: block; color: black; background: linear-gradient(to right, #11998E, #38EF7D); padding: 10px; margin-bottom: 10px; border-radius: 15px;">Visit Us</button>
+                        </a>
+
+                        <a href="https://maps.app.goo.gl/RgwJfimnTNhyzuVv9" target="_blank" style="text-decoration: none;">
+                            <button style="border-color: goldenrod; width: 100%; display: block; color: rgb(0, 0, 0); background: linear-gradient(to right, #009245, #FCEE21);  padding: 10px; margin-bottom: 10px; border-radius: 15px"" >View on Map</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
+
         <div class="ctrlqCenteredContent">
             <div class="ctrlqFormCard">
                 <div class="ctrlqAccent"></div>
                 <div class="ctrlqFormContent">
                     <div class="row">
                         <div class="input-field col s12">
-                            <h4>Sorry, the ssId you provided is not available in our database. Please check again.</h4>
+                            <h4 style="font-family: Verdana;">Sorry, the ssId you provided is not available in our database. Please check again.</h4>
                         </div>
                     </div>
                 </div>
