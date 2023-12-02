@@ -7,7 +7,11 @@ from authors import author_names, authors_dict
 SURVEY_DB = "daiict_survey.sqlite3"
 app = Flask(__name__)
 
-@app.route('/')
+# @app.route('/') # Removed to eliminate clashes. so provide users with the whole url endpoint
+# def index():
+#     return redirect(url_for('provide_name'))
+
+@app.route('/surveys/reviewer_matchmaking')
 def index():
     return redirect(url_for('provide_name'))
 
